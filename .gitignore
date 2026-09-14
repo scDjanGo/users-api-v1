@@ -1,0 +1,6 @@
+.env
+test
+src/data/
+*.db 
+docs
+tmp/
