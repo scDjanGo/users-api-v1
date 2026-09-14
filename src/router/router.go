@@ -10,6 +10,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/gin-contrib/cors"
 
 	_ "users-api-v1/src/docs"
 	"users-api-v1/src/handlers"
@@ -36,6 +37,12 @@ func RouterInit(userHandler *handlers.UserHandler, mediaDir string, maxUploadSiz
 	}
 
 	router := gin.Default()
+
+	router.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowMethods: []string{"GET", "POST", "PATCH", "PUT", "DELETE",},
+		AllowHeaders: []string{"Origin", "Content-Type", "Authorization"},
+	}))
 
 	authRouter := router.Group("/auth")
 	{
